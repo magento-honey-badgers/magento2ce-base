@@ -37,7 +37,17 @@ class ConfigurableProductViewTest extends GraphQlAbstract
         weight
         category_ids                
         ... on ConfigurableProduct {
-            configurable_product_links {
+        configurable_product_options{
+        attribute_id
+        label
+        position
+        id
+        is_use_default
+        values {
+            value_index      
+        }    
+  }
+        configurable_product_links {            
                 id
                 category_ids
                 name
@@ -92,6 +102,7 @@ QUERY;
 
         $this->assertArrayHasKey('product', $response);
         $this->assertBaseFields($product, $response['product']);
+        $this->assertConfigurableProductOptions($product, $response['product']);
         $this->assertConfigurableProductLinks($response['product']);
     }
 
@@ -118,6 +129,49 @@ QUERY;
         ];
 
         $this->assertResponseFields($actualResponse, $assertionMap);
+    }
+
+    /**
+     * Asserts the different fields for configurable product option of a configurable product
+     *
+     * @param $product
+     * @param $actualResponse
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
+    private function assertConfigurableProductOptions($product, $actualResponse)
+    {
+        $this->assertNotEmpty(
+            $actualResponse['configurable_product_options'],
+            "Precondition failed: 'configurable_product_options' must not be empty"
+        );
+        $configurableProductOptions = $product->getExtensionAttributes()->getConfigurableProductOptions();
+        $configurableProductOptionOne = $configurableProductOptions[0];
+        foreach ($actualResponse[
+            'configurable_product_options'] as $configurableProductOptionIndex => $configurableProductOptionArray) {
+            $this->assertNotEmpty($configurableProductOptionArray);
+            $this->assertResponseFields(
+                $actualResponse['configurable_product_options'][$configurableProductOptionIndex],
+                [
+                    'attribute_id' =>$configurableProductOptionOne->getAttributeId(),
+                    'label' => $configurableProductOptionOne->getLabel(),
+                    'position' => $configurableProductOptionOne->getPosition(),
+                    'id' => $configurableProductOptions[0]->getData()['product_super_attribute_id']
+                ]
+            );
+            $configurableProductOptionValues = $configurableProductOptionOne->getValues();
+            $this->assertResponseFields(
+                $actualResponse['configurable_product_options'][0]['values'][0],
+                [
+                    'value_index' => $configurableProductOptionValues[0]->getValueIndex()
+                ]
+            );
+            $this->assertResponseFields(
+                $actualResponse['configurable_product_options'][0]['values'][1],
+                [
+                    'value_index' => $configurableProductOptionValues[1]->getValueIndex()
+                ]
+            );
+        }
     }
 
     /**
