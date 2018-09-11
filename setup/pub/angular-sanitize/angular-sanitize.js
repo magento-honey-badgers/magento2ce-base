@@ -159,7 +159,7 @@
         END_TAG_REGEXP = /^<\s*\/\s*([\w:-]+)[^>]*>/,
         ATTR_REGEXP = /([\w:-]+)(?:\s*=\s*(?:(?:"((?:[^"])*)")|(?:'((?:[^'])*)')|([^>\s]+)))?/g,
         BEGIN_TAG_REGEXP = /^</,
-        BEGIN_END_TAGE_REGEXP = /^<\s*\//,
+        BEGING_END_TAGE_REGEXP = /^<\s*\//,
         COMMENT_REGEXP = /<!--(.*?)-->/g,
         DOCTYPE_REGEXP = /<!DOCTYPE([^>]*?)>/i,
         CDATA_REGEXP = /<!\[CDATA\[(.*?)]]>/g,
@@ -260,7 +260,7 @@
                         chars = false;
                     }
                     // end tag
-                } else if ( BEGIN_END_TAGE_REGEXP.test(html) ) {
+                } else if ( BEGING_END_TAGE_REGEXP.test(html) ) {
                     match = html.match( END_TAG_REGEXP );
 
                     if ( match ) {

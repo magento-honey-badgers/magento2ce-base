@@ -270,9 +270,6 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($errorMessage, $errors[0]);
     }
 
-    /**
-     * @return array
-     */
     public function redisOptionProvider()
     {
         return [
@@ -297,9 +294,6 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
     public function invalidOptionsProvider()
     {
         return [

@@ -196,7 +196,10 @@
         "magento/language-nl_nl": "*",
         "magento/language-pt_br": "*",
         "magento/language-zh_hans_cn": "*",
-        "magento/framework": "*"
+        "magento/framework": "*",
+
+        "magento/module-page-builder": "*",
+        "magento/module-page-builder-analytics": "*"
     },
     "require-dev": {
         "magento/magento2-functional-testing-framework": "2.3.4",
@@ -270,19 +273,23 @@
     "repositories": [
         {
             "type": "path",
-            "url": "/var/www/magento2ce/app/code/*/*"
+            "url": "../../sources/magento2ce/app/code/*/*"
         },
         {
             "type": "path",
-            "url": "/var/www/magento2ce/lib/internal/*/*"
+            "url": "../../sources/magento2ce/lib/internal/*/*"
         },
         {
             "type": "path",
-            "url": "/var/www/magento2ce/app/design/*/*/*"
+            "url": "../../sources/magento2ce/app/design/*/*/*"
         },
         {
             "type": "path",
-            "url": "/var/www/magento2ce/app/i18n/*/*"
+            "url": "../../sources/magento2ce/app/i18n/*/*"
+        },
+        {
+            "type": "path",
+            "url": "../../sources/magento2-page-builder/app/code/*/*"
         }
     ]
 }

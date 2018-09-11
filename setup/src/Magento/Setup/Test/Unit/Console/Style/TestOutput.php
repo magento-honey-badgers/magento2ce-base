@@ -20,10 +20,6 @@ class TestOutput extends Output
         $this->output = '';
     }
 
-    /**
-     * @param string $message
-     * @param bool $newline
-     */
     protected function doWrite($message, $newline)
     {
         $this->output .= $message . ($newline ? "\n" : '');

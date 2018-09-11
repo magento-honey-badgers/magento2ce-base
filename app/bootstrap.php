@@ -54,16 +54,8 @@ if (
     && isset($_SERVER['HTTP_ACCEPT'])
     && strpos($_SERVER['HTTP_ACCEPT'], 'text/html') !== false
 ) {
-    $profilerConfig = isset($_SERVER['MAGE_PROFILER']) && strlen($_SERVER['MAGE_PROFILER'])
-        ? $_SERVER['MAGE_PROFILER']
-        : trim(file_get_contents(BP . '/var/profiler.flag'));
-
-    if ($profilerConfig) {
-        $profilerConfig = json_decode($profilerConfig, true) ?: $profilerConfig;
-    }
-
-    Magento\Framework\Profiler::applyConfig(
-        $profilerConfig,
+    \Magento\Framework\Profiler::applyConfig(
+        (isset($_SERVER['MAGE_PROFILER']) && strlen($_SERVER['MAGE_PROFILER'])) ? $_SERVER['MAGE_PROFILER'] : trim(file_get_contents(BP . '/var/profiler.flag')),
         BP,
         !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
     );

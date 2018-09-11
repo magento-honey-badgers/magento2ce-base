@@ -518,10 +518,6 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
         }
     }
 
-    /**
-     * @param array $messages
-     * @return array
-     */
     private function reduceBuffer($messages)
     {
         // We need to know if the two last chars are PHP_EOL
